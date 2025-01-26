@@ -25,7 +25,7 @@ See the `demo.html` file in this repository to see the library in action, with a
 To add Xenon to a HTML document, add the following script tag to the head of the document:
 
 ```html
-<script defer src="https://raw.githubusercontent.com/p2js/xenon/refs/heads/main/src/xenon.min.js"></script>
+<script defer src="https://raw.githubusercontent.com/p2js/xenon/refs/heads/main/xenon.min.js"></script>
 ```
 
 ### Declaring/Using component templates
