@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Xenon demo</title>
+
+    <template _="project" name wip description="<i>Project does not have a description.</i>" link github-repo
+        thumbnail-src>
+        <div class="project">
+            <h3>
+                {name}
+                <if wip>(WIP)</if>
+            </h3>
+            <if link github-repo>
+                <div class="projectIcons">
+                    <if link>
+                        <a href="{link}" rel="noreferrer" target="_blank">
+                            <img class="icon" src="https://alfiot.net/resources/icons/link.svg" alt="Link">
+                        </a>
+                    </if>
+                    <if github-repo>
+                        <a href="https://github.com/{github-repo}" rel="noreferrer" target="_blank">
+                            <img class="icon" src="https://alfiot.net/resources/icons/github.svg" alt="Github" />
+                        </a>
+                    </if>
+                </div>
+            </if>
+            <p>{description}</p>
+            <if thumbnail-src>
+                <img class="thumbnail" src="{thumbnail-src}" alt="{name} project thumbnail">
+            </if>
+        </div>
+    </template>
+    <style>
+        body {
+            background: #eee;
+        }
+
+        h3 {
+            display: inline;
+        }
+
+        .project {
+            width: 40vw;
+        }
+
+        .thumbnail {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 0.5em;
+            margin-bottom: 3em;
+            max-width: 100%;
+            max-height: 15em;
+        }
+
+        .projectIcons {
+            display: inline;
+            float: right;
+        }
+
+        .projectIcons img {
+            position: relative;
+            top: 0.5em;
+            filter: var(--project-link-filter);
+            width: 1.5em;
+            height: 1.5em;
+            transition-timing-function: ease;
+            transition-duration: 0.3s;
+            opacity: 50%;
+        }
+
+        .projectIcons img:hover {
+            top: 0.4em;
+            opacity: 90%;
+        }
+
+        .projectIcons a {
+            color: transparent;
+            margin-left: 0.5em;
+        }
+    </style>
+    <script src="xenon.js" defer></script>
+</head>
+
+<body>
+    <h1>My Projects</h1>
+
+    <project name="Verbena"
+        description="A TypeScript library that transcompiles mathematical function definitions to native JS functions in an end-user-safe way."
+        github-repo="p2js/verbena" thumbnail-src="https://alfiot.net/resources/thumbnails/verbena.png">
+    </project>
+
+    <project name="Televideo Web" description="A better web browser for RAI's Italian teletext service, Televideo."
+        link="https://alfiot.net/televideo" github-repo="p2js/televideo-web"
+        thumbnail-src="https://alfiot.net/resources/thumbnails/televideo.png">
+    </project>
+
+    <project name="Acuity" wip description="A mathematical note-editor."></project>
+</body>
+
+</html>
