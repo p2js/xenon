@@ -1,15 +1,15 @@
 (() => {
-    function processComponentDeclaration(componentDeclaration) {
-        let componentName = componentDeclaration.getAttribute("_");
-        componentDeclaration.removeAttribute("_");
+    let processComponentTemplate = template => {
+        let componentName = template.getAttribute("_");
+        template.removeAttribute("_");
         document.querySelectorAll(componentName).forEach(instance => {
             // Process the template HTML
-            let instanceHTML = componentDeclaration.innerHTML;
+            let instanceHTML = template.innerHTML;
             // Get all the attirbutes in the declaration
-            for (let attributeName of componentDeclaration.getAttributeNames()) {
+            for (let attributeName of template.getAttributeNames()) {
                 // replace all instances of {<attributeName>} with the value given in the instance,
                 // otherwise use the component's default value
-                let attributeValue = instance.getAttribute(attributeName) || componentDeclaration.getAttribute(attributeName);
+                let attributeValue = instance.getAttribute(attributeName) || template.getAttribute(attributeName);
                 instanceHTML = instanceHTML.replaceAll("{" + attributeName + "}", attributeValue);
             }
             // Replace all instances of {$children} with the instance's HTML
@@ -31,9 +31,9 @@
         });
     }
     // Process inline component templates
-    document.querySelectorAll("template[_]").forEach(processComponentDeclaration);
+    document.querySelectorAll("template[_]").forEach(processComponentTemplate);
     // Process component template imports
     document.querySelectorAll("iframe.template-import").forEach(templateImport => {
-        templateImport.onload = () => templateImport.contentDocument.querySelectorAll("template[_]").forEach(processComponentDeclaration);
+        templateImport.onload = () => templateImport.contentDocument.querySelectorAll("template[_]").forEach(processComponentTemplate);
     });
 })();

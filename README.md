@@ -2,7 +2,7 @@
 
 Xenon is a small library that implements declarative, reusable components into vanilla HTML, with no user-side javascript or build step.
 
-The entire library uses exactly 651 bytes of javascript.
+The entire library uses exactly 648 bytes of javascript.
 
 ## Motivation
 
@@ -28,12 +28,12 @@ To add Xenon to a HTML document, add the following script tag to the head of the
 <script defer src="https://cdn.jsdelivr.net/gh/p2js/xenon@latest/xenon.min.js"></script>
 ```
 
-Alternatively, for faster loads, you can inline Xenon by placing the following script into your document:
+Alternatively, for faster loading, you can inline Xenon by placing the following script into your document:
 
 ```html
 <script defer>
 // https://github.com/p2js/xenon
-(()=>{function e(e){let t=e.getAttribute("_");e.removeAttribute("_"),document.querySelectorAll(t).forEach((t=>{let r=e.innerHTML;for(let l of e.getAttributeNames()){let o=t.getAttribute(l)||e.getAttribute(l);r=r.replaceAll("{"+l+"}",o)}r=r.replaceAll("{$children}",t.innerHTML),t.innerHTML=r,t.querySelectorAll("if").forEach((e=>{e.getAttributeNames().some((e=>t.hasAttribute(e)))?e.replaceWith(...e.childNodes):e.remove()})),t.outerHTML=t.innerHTML}))}document.querySelectorAll("template[_]").forEach(e),document.querySelectorAll("iframe.template-import").forEach((t=>{t.onload=()=>t.contentDocument.querySelectorAll("template[_]").forEach(e)}))})();
+(()=>{let e=e=>{let t=e.getAttribute("_");e.removeAttribute("_"),document.querySelectorAll(t).forEach((t=>{let r=e.innerHTML;for(let l of e.getAttributeNames()){let o=t.getAttribute(l)||e.getAttribute(l);r=r.replaceAll("{"+l+"}",o)}r=r.replaceAll("{$children}",t.innerHTML),t.innerHTML=r,t.querySelectorAll("if").forEach((e=>{e.getAttributeNames().some((e=>t.hasAttribute(e)))?e.replaceWith(...e.childNodes):e.remove()})),t.outerHTML=t.innerHTML}))};document.querySelectorAll("template[_]").forEach(e),document.querySelectorAll("iframe.template-import").forEach((t=>{t.onload=()=>t.contentDocument.querySelectorAll("template[_]").forEach(e)}))})();
 </script>
 ```
 
