@@ -12,6 +12,8 @@
                 let attributeValue = instance.getAttribute(attributeName) || componentDeclaration.getAttribute(attributeName);
                 instanceHTML = instanceHTML.replaceAll("{" + attributeName + "}", attributeValue);
             }
+            // Replace all instances of {$children} with the instance's HTML
+            instanceHTML = instanceHTML.replaceAll("{$children}", instance.innerHTML);
             // Place it inside the instance for if-block processing
             instance.innerHTML = instanceHTML;
 

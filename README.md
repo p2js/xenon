@@ -1,8 +1,8 @@
-# Xenon: Static HTML Components in 600 Bytes
+# Xenon: Static HTML Components in 650 Bytes
 
 Xenon is a small library that implements declarative, reusable components into vanilla HTML, with no user-side javascript or build step.
 
-The entire library uses just 609 bytes of javascript.
+The entire library uses exactly 651 bytes of javascript.
 
 ## Motivation
 
@@ -62,9 +62,25 @@ Parameters can be referenced by inserting their name in curly braces. They can b
 <!-- Will render as: <p>So you're telling me a shrimp fried this rice?</p> <i>;)</i> -->
 ```
 
+### Component children
+
+Any instance of `{$children}` inside a component template will be replaced with the component instances' inner HTML:
+
+```html
+<template _="double">
+    {$children}
+    {$children}
+</template>
+
+<double>
+    <p>Am I seeing double?</p> 
+</double>
+<!-- Will render as: <p>Am I seeing double?</p> <p>Am I seeing double?</p> -->
+```
+
 ### Conditional rendering
 
-Sometimes, it's useful to want to only display something if an attribute has been provided, such as a summary component that only shows a thumbnail if the instance has a source link.
+Sometimes, it's useful to want to only display something if an instance includes an attribute, such as a summary component that only shows a thumbnail if the instance provides a source link.
 
 To do this, use an `<if>` element inside your template, passing the attribute that needs to be included as an attribute:
 
