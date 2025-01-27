@@ -1,8 +1,8 @@
 # Xenon: Static HTML Components in 650 Bytes
 
-Xenon is a small library that implements declarative, reusable components into vanilla HTML, with no user-side javascript or build step.
+Xenon is a small library that implements declarative, reusable components into static HTML, with no javascript interaction or build step.
 
-The entire library uses exactly 648 bytes of javascript.
+The entire library uses exactly 627 bytes of javascript.
 
 ## Motivation
 
@@ -31,7 +31,7 @@ Alternatively, for faster loading, you can inline Xenon by placing the following
 ```html
 <script defer>
 // https://github.com/p2js/xenon
-(()=>{let e=e=>{let t=e.getAttribute("_");e.removeAttribute("_"),document.querySelectorAll(t).forEach((t=>{let r=e.innerHTML;for(let l of e.getAttributeNames()){let o=t.getAttribute(l)||e.getAttribute(l);r=r.replaceAll("{"+l+"}",o)}r=r.replaceAll("{$children}",t.innerHTML),t.innerHTML=r,t.querySelectorAll("if").forEach((e=>{e.getAttributeNames().some((e=>t.hasAttribute(e)))?e.replaceWith(...e.childNodes):e.remove()})),t.outerHTML=t.innerHTML}))};document.querySelectorAll("template[_]").forEach(e),document.querySelectorAll("iframe.template-import").forEach((t=>{t.onload=()=>t.contentDocument.querySelectorAll("template[_]").forEach(e)}))})();
+(e=>{let t=e=>e.querySelectorAll("template[_]").forEach((e=>{document.querySelectorAll(e.getAttribute("_")).forEach((t=>{let r=e.innerHTML;for(let l of e.getAttributeNames().filter((e=>"_"!=e))){let o=t.getAttribute(l)||e.getAttribute(l);r=r.replaceAll("{"+l+"}",o)}r=r.replaceAll("{$children}",t.innerHTML),t.innerHTML=r,t.querySelectorAll("if").forEach((e=>{e.getAttributeNames().some((e=>t.hasAttribute(e)))?e.replaceWith(...e.childNodes):e.remove()})),t.outerHTML=t.innerHTML})),e.remove()}));t(document),document.querySelectorAll("iframe.template-import").forEach((e=>{e.onload=r=>{t(e.contentDocument),e.remove()}}))})();
 </script>
 ```
 
