@@ -23,13 +23,11 @@ See the `demo.html` file in this repository to see the library in action, with a
 ### Adding to a project
 
 To add Xenon to a HTML document, add the following script tag to the head of the document:
-
 ```html
 <script defer src="https://cdn.jsdelivr.net/gh/p2js/xenon@latest/xenon.min.js"></script>
 ```
 
 Alternatively, for faster loading, you can inline Xenon by placing the following script into your document:
-
 ```html
 <script defer>
 // https://github.com/p2js/xenon
@@ -40,7 +38,6 @@ Alternatively, for faster loading, you can inline Xenon by placing the following
 ### Declaring/Using component templates
 
 To add a component to a HTML document, start by declaring its template: insert a HTML template element with the `_` attribute set to the component's name:
-
 ```html
 <template _="greeting">
     <p>Hello, World!</p>
@@ -50,7 +47,6 @@ To add a component to a HTML document, start by declaring its template: insert a
 Standard practice is adding them to the head of your HTML, as they are unrendered fragments to be used elsewhere.
 
 Then, just add an element with the specified name, and it will be transformed into the template's inner HTML when the document loads:
-
 ```html
 <greeting></greeting> <!-- Will render as: <p>Hello, World!</p> -->
 ```
@@ -74,7 +70,6 @@ Parameters can be referenced by inserting their name in curly braces. They can b
 ### Component children
 
 Any instance of `{$children}` inside a component template will be replaced with the component instances' inner HTML:
-
 ```html
 <template _="double">
     {$children}
@@ -92,7 +87,6 @@ Any instance of `{$children}` inside a component template will be replaced with 
 Sometimes, it's useful to want to only display something if an instance includes an attribute, such as a summary component that only shows a thumbnail if the instance provides a source link.
 
 To do this, use an `<if>` element inside your template, passing the attribute that needs to be included as an attribute:
-
 ```html
 <template _="conditional" name>
     <if name>
@@ -100,18 +94,14 @@ To do this, use an `<if>` element inside your template, passing the attribute th
     </if>
 </template>
 ```
-
 These elements will render their inner HTML if one of the provided parameters is present in the element (acting as logical OR), otherwise rendering nothing:
-
 ```html
-
 <conditional name="HTML lover"></conditional> 
 <!-- Renders as: <p>You're here, HTML Lover!</p> -->
 
 <conditional></conditional>                   
 <!-- Renders nothing -->
 ```
-
 If blocks can be nested to act as logical AND.
 
 ## Template imports
@@ -119,7 +109,6 @@ If blocks can be nested to act as logical AND.
 To share components between files or on the web, or simply store them in their own files, you can use component template imports.
 
 Store any number of components inside a separate HTML file:
-
 ```html
 <!-- speech.template.html -->
 <template _="speech" say><pre>
@@ -130,13 +119,9 @@ Store any number of components inside a separate HTML file:
 / \
 </pre></template>
 ```
-
-You can then import templates, either from a local file or from anywhere on the web, using an `iframe` element with its `class` attribute set to `template-import`:
-
+You can then import templates, either from a local file or from anywhere on the web, using an `iframe` element with its `class` attribute set to `template-import`. They can be used just like inline templates, and will render once the iframes load:
 ```html
 <iframe hidden class="template-import" src="speech.template.html"></iframe>
 
 <speech say="Ahoy there!"></speech> <!--Will render once loaded!-->
 ```
-
-**⚠️ Please note:** Template imports are visibly slower than inline templates, as on top of the time to load another HTML file, they need to wait until the iframe has loaded to process the templates, meaning it happens after the initial render. They are meant to be used more for publishing one or more templates as a library on the internet.
