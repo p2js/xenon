@@ -104,7 +104,7 @@ These elements will render their inner HTML if one of the provided parameters is
 ```
 If blocks can be nested to act as logical AND.
 
-## Template imports
+## Template Imports
 
 To share components between files or on the web, or simply store them in their own files, you can use component template imports.
 
