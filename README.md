@@ -1,8 +1,8 @@
 # Xenon: Static HTML Components in 650 Bytes
 
-Xenon is a small library that implements declarative, reusable components into static HTML, with no javascript interaction or build step.
+Xenon is a small library that implements declarative, reusable components into static HTML, with no JavaScript interaction or build step.
 
-The entire library uses exactly 627 bytes of javascript.
+The entire library uses exactly 627 bytes of JavaScript.
 
 ## Motivation
 
@@ -81,6 +81,7 @@ Any instance of `{$children}` inside a component template will be replaced with 
 </double>
 <!-- Will render as: <p>Am I seeing double?</p> <p>Am I seeing double?</p> -->
 ```
+Children can also be used as a partial fallback for if the component fails to load (such as if JavaScript is disabled).
 
 ### Conditional rendering
 
