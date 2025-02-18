@@ -22,14 +22,14 @@ See the `demo.html` file in this repository to see the library in action, with a
 
 ### Adding to a project
 
-To add Xenon to a HTML document, add the following script tag to the head of the document:
+To add Xenon to a HTML document, add the following script tag to the end of the document body:
 ```html
-<script defer src="https://cdn.jsdelivr.net/gh/p2js/xenon@latest/xenon.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/p2js/xenon@latest/xenon.min.js"></script>
 ```
 
 Alternatively, for faster loading, you can inline Xenon by placing the following script into your document:
 ```html
-<script defer>
+<script>
 // https://github.com/p2js/xenon
 (e=>{let t=(e,t)=>e.querySelectorAll(t),r=e=>t(e,"template[_]").forEach((e=>{t(document,e.getAttribute("_")).forEach((r=>{let o=e.innerHTML;for(let t of e.getAttributeNames().filter((e=>"_"!=e)))o=o.replaceAll("{"+t+"}",r.getAttribute(t)||e.getAttribute(t));o=o.replaceAll("{$children}",r.innerHTML),r.innerHTML=o,t(r,"if").forEach((e=>{e.getAttributeNames().some((e=>r.hasAttribute(e)))?e.replaceWith(...e.childNodes):e.remove()})),r.outerHTML=r.innerHTML})),e.remove()}));r(document),t(document,"iframe.template-import").forEach((e=>{e.onload=t=>{r(e.contentDocument),e.remove()}}))})();
 </script>
@@ -46,25 +46,25 @@ To add a component to a HTML document, start by declaring its template: insert a
 
 Standard practice is adding them to the head of your HTML, as they are unrendered fragments to be used elsewhere.
 
-Then, just add an element with the specified name, and it will be transformed into the template's inner HTML when the document loads:
+Then, just add an element with the specified selector, and it will be transformed into the template's inner HTML when the document loads:
 ```html
 <greeting></greeting> <!-- Will render as: <p>Hello, World!</p> -->
 ```
+*technical note*: You can use any CSS selector in the `_` attribute, eg. `p.x-greeting[name]`, to only transform elements with the specified properties.
 
 ### Attributes
 
-In your template declaration, you can add any parameters you want by passing them as parameters to the template element, optionally assigning a default value to them.
+In your template declaration, you can add any attributes you want by passing them as attributes to the template element, optionally assigning a default value to them.
 
-Parameters can be referenced by inserting their name in curly braces. They can be used to insert values in text or attribute names/values:
+Attribute values can be referenced by inserting their name in curly braces. They can be used to insert values in text or anywhere in the inner HTML:
 
 ```html
-<template _="joke" noun wink="<i>;)</i>">
-    <p>So you're telling me a {noun} fried this rice?</p>
-    {wink}
+<template _="joke" noun style="color: red">
+    <p style={style}>So you're telling me a {noun} fried this rice?</p>
 </template>
 
-<joke noun="shrimp"></joke>
-<!-- Will render as: <p>So you're telling me a shrimp fried this rice?</p> <i>;)</i> -->
+<joke noun="<b>shrimp</b>"></joke>
+<!-- Will render as: <p style="color: red">So you're telling me a <b>shrimp</b> fried this rice?</p>-->
 ```
 
 ### Component children
