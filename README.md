@@ -1,6 +1,6 @@
 # Xenon: Static HTML Components in 600 Bytes
 
-Xenon is a small library that implements declarative, reusable components into static HTML, with no JavaScript interaction or build step.
+Xenon is a small library that implements declarative, reusable components into static HTML, with no JavaScript interaction, framework or build step.
 
 The entire library uses exactly 589 bytes of JavaScript.
 
@@ -16,9 +16,9 @@ However, even a small static webpage like this could benefit from having some so
 
 Xenon addresses this issue; an extremely small drop-in library with no dependencies that offers a flexible way to compose easily reusable and maintainable markup.
 
-See the `demo.html` file in this repository to see the library in action, with a recreation of my website's projects page using Xenon components.
+See [my website's repository](https://github.com/p2js/alfiot.net) to see the library in action, as its projects section was rewritten using Xenon.
 
-## Basic Usage
+## Usage Documentation
 
 ### Adding to a project
 
@@ -60,11 +60,11 @@ Attribute values can be referenced by inserting their name in curly braces. They
 
 ```html
 <template _="joke" noun style="color: red">
-    <p style={style}>So you're telling me a {noun} fried this rice?</p>
+    <p style="{style}">So you're telling me a {noun} fried this rice?</p>
 </template>
 
 <joke noun="<b>shrimp</b>"></joke>
-<!-- Will render as: <p style="color: red">So you're telling me a <b>shrimp</b> fried this rice?</p>-->
+<!-- Will render as: <p style="color: red">So you're telling me a <b>shrimp</b> fried this rice?</p> -->
 ```
 
 ### Component children
@@ -85,11 +85,12 @@ Children can also be used as a partial fallback for if the component fails to lo
 
 ### Conditional rendering
 
-Sometimes, it's useful to want to only display something if an instance includes an attribute, such as a summary component that only shows a thumbnail if the instance provides a source link.
+Sometimes, it's useful to want to only display something if an instance includes an attribute, such as a summary component that only shows a thumbnail if the instance provides an image URL.
 
 To do this, use an `<if>` element inside your template, passing the attribute that needs to be included as an attribute:
 ```html
 <template _="conditional" name>
+    <p>Hi!</p>
     <if name>
         <p>You're here, {name}!</p>
     </if>
@@ -98,14 +99,14 @@ To do this, use an `<if>` element inside your template, passing the attribute th
 These elements will render their inner HTML if one of the provided parameters is present in the element (acting as logical OR), otherwise rendering nothing:
 ```html
 <conditional name="HTML lover"></conditional> 
-<!-- Renders as: <p>You're here, HTML Lover!</p> -->
+<!-- Renders as: <p>Hi!</p> <p>You're here, HTML Lover!</p> -->
 
 <conditional></conditional>                   
-<!-- Renders nothing -->
+<!-- Renders as: <p>Hi!</p> -->
 ```
 If blocks can be nested to act as logical AND.
 
-## Template Imports
+### Template Imports
 
 To share components between files or on the web, or simply store them in their own files, you can use component template imports.
 
@@ -124,5 +125,5 @@ You can then import templates, either from a local file or from anywhere on the 
 ```html
 <iframe hidden class="template-import" src="speech.template.html"></iframe>
 
-<speech say="Ahoy there!"></speech> <!--Will render once loaded!-->
+<speech say="Ahoy there!"></speech> <!-- Will render once loaded! -->
 ```
