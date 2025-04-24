@@ -14,7 +14,7 @@
             let instanceHTML = template[innerHTML];
 
             // Get the attributes in the declaration (besides "_")
-            template[getAttributeNames].forEach(attributeName => attributeName != "_" && (
+            template[getAttributeNames]().forEach(attributeName => attributeName != "_" && (
                 // replace all appearances of {<attributeName>} with the value given in the instance,
                 // otherwise use the component's default value
                 instanceHTML = instanceHTML[replaceAll](`{${attributeName}}`,
