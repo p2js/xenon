@@ -1,6 +1,6 @@
 # Experimental 500B Rewrite
 
-This branch contains a rewrite of xenon that maintains all functionality but is now under 0.5KB (exactly 499 bytes). It uses several code-golfing techniques to achieve this reduced size:
+This branch contains a rewrite of xenon that maintains all functionality but is now under 0.5KB (exactly 496 bytes). It uses several code-golfing techniques to achieve this reduced size:
 
 - Several property accessors (such as `innerHTML`) were redefined as string variables, which can then be used to access that property on objects using indexing:
 
@@ -21,4 +21,4 @@ a[i] = /*...*/;
 
 ## Notes
 
-Some of this refactoring may make its way onto the main branch eventually. The first two techniques, however, seem like too much of a sacrifice for what ends up being a practically insignificant size reduction (the first in terms of readability, the second due to saving literally one byte and being slower).
+Some of this refactoring may make its way onto the main branch eventually. The first two techniques, however, seem like too much of a sacrifice for what ends up being a practically insignificant size reduction (the first in terms of legibility, the second due to saving literally one byte and being slower).

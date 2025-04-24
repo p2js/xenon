@@ -14,16 +14,12 @@
             // Process the template HTML
             let instanceHTML = template[innerHTML];
 
-            // Get the attributes in the declaration
-            for (let attributeName of template[getAttributeNames]()) {
+            // Get the attributes in the declaration (besides "_")
+            template[getAttributeNames].forEach(attributeName => attributeName != "_" && (
                 // replace all appearances of {<attributeName>} with the value given in the instance,
                 // otherwise use the component's default value
-                if (attributeName != "_") {
-                    instanceHTML = instanceHTML[replaceAll](`{${attributeName}}`,
-                        instance[getAttribute](attributeName) || template[getAttribute](attributeName));
-                }
-            }
-
+                instanceHTML = instanceHTML[replaceAll](`{${attributeName}}`,
+                    instance[getAttribute](attributeName) || template[getAttribute](attributeName))));
             // Replace all appearances of {$children} with the instance's HTML
             instanceHTML = instanceHTML[replaceAll]("{$children}", instance[innerHTML]);
 
@@ -49,10 +45,10 @@
     // Process and remove inline component templates
     processTemplates(htmlDocument);
     // Process and remove component template imports
-    forAll(htmlDocument, "iframe.template-import", templateImport => {
+    forAll(htmlDocument, "iframe.template-import", templateImport =>
         templateImport.onload = _ => {
             processTemplates(templateImport.contentDocument);
             templateImport.remove();
         }
-    });
+    );
 })();
