@@ -2,7 +2,7 @@
 
 This branch experiments with adding a script execution feature to xenon components while keeping within the size restrictions.
 
-Note that the code is significantly more unreadable, and required switching to a local terser-based minifying script to mangle only the correct variable names.
+Note that the code is significantly less legible, and required a dedicated terser-based minifying script to mangle only the correct variable names (build using `pnpm build`).
 
 ## Component scripts
 
