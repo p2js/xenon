@@ -1,12 +1,11 @@
 (_ => {
     // Redefinitions to minify every other reference to a single letter
-    let forAll = (element, selector, fn) => element.querySelectorAll(selector).forEach(fn);
+    let forAll = (element, selector, fn) => element?.querySelectorAll(selector).forEach(fn);
     let htmlDocument = document;
     let getAttribute = "getAttribute";
     let getAttributeNames = "getAttributeNames";
     let replaceAll = "replaceAll";
     let innerHTML = "innerHTML";
-
     // Process a document's component templates and apply them to the current document
     let processTemplates = doc => forAll(doc, "template[_]", template => {
         // Select all elements in the current document with the name specified in the attribute
@@ -45,7 +44,7 @@
     // Process and remove inline component templates
     processTemplates(htmlDocument);
     // Process and remove component template imports
-    forAll(htmlDocument, "iframe.template-import", templateImport =>
+    forAll(htmlDocument, ".template-import", templateImport =>
         templateImport.onload = _ => {
             processTemplates(templateImport.contentDocument);
             templateImport.remove();
