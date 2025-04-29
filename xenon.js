@@ -14,11 +14,13 @@
             // Redefine instance (as separate non-mangled variable to be used by eval)
             let instance = _instance;
 
-            for (let attributeName of template.getAttributeNames().filter(name => name != "_")) {
+            for (let attributeName of template.getAttributeNames()) {
                 // replace all appearances of {<attributeName>} with the value given in the instance,
                 // otherwise use the component's default value
-                instanceHTML = instanceHTML.replaceAll("{" + attributeName + "}",
-                    getAttribute(_instance, attributeName) || getAttribute(template, attributeName));
+                if (attributeName != "_") {
+                    instanceHTML = instanceHTML.replaceAll("{" + attributeName + "}",
+                        getAttribute(_instance, attributeName) || getAttribute(template, attributeName));
+                }
             }
 
             // Replace all appearances of {$children} with the instance's HTML
@@ -34,10 +36,7 @@
             );
 
             // Process <script> blocks
-            forAll(_instance, "script", script => {
-                eval(script.innerHTML);
-                remove(script)
-            });
+            forAll(_instance, "script", script => script.outerHTML = eval(script.innerHTML) || "");
 
             // Replace the instance with its processed HTML
             _instance.outerHTML = _instance.innerHTML;
