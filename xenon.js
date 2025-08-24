@@ -7,7 +7,7 @@
         forAll(document, template.getAttribute("_"), instance => {
             // Process the template HTML
             let instanceHTML = template.innerHTML;
-            // For each attribute in the declaration, replace each instance of {<attributeName>}
+            // For each attribute in the declaration, replace each appearance of {<attributeName>}
             // With the value givgen in the instance, otherwise use the declaration's default value
             template.getAttributeNames().forEach(attributeName =>
                 attributeName != "_" && (instanceHTML = instanceHTML.replaceAll("{" + attributeName + "}",
