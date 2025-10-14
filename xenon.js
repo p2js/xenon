@@ -23,7 +23,7 @@
             instance.innerHTML = instanceHTML;
             // Process <if> blocks
             forAll(instance, "if", ifBlock =>
-                // show child nodes if any of the attributes in the block are 
+                // show child nodes if any of the attributes in the block are passed to the template 
                 ifBlock.replaceWith(...(
                     ifBlock.getAttributeNames().some(attribute => instance.hasAttribute(attribute))
                         ? ifBlock.childNodes
@@ -39,10 +39,8 @@
     // Process and remove inline component templates
     processTemplates(document);
     // Process and remove component template imports
-    forAll(document, ".template-import", templateImport => {
-        templateImport.onload = _ => {
-            processTemplates(templateImport.contentDocument);
-            templateImport.remove();
-        }
+    forAll(document, ".template-import", templateImport => templateImport.onload = _ => {
+        processTemplates(templateImport.contentDocument);
+        templateImport.remove();
     });
 })();
