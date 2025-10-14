@@ -13,14 +13,8 @@ a[i] = /*...*/;
 
 - The attribute replacing was changed from a concatenated string to a template string.
 
-- The `filter` call for attribute names that aren't `_` was changed to a condition in the body of the loop.
-
-- the `selectAll` redefinition in the main version was modified to include `forEach` (now called `forAll`).
-
-- the `<if>` block processing was changed to have the condition inside the `replaceWith` function, with removal achieved by calling with a spreaded empty array if the conditions aren't met.
-
-- importing templates now looks for all elements with the `template-import` class instead of just `iframe`s, but doesn't do anything for elements that don't have a `contentDocument`.
+- the first variable (forAll) is passed as the argument to the function to save declaration space
 
 ## Notes
 
-Some of this refactoring may make its way onto the main branch eventually. The first two techniques, however, seem like too much of a sacrifice for what ends up being a practically insignificant size reduction (the first in terms of legibility, the second due to saving literally one byte and being slower).
+All of these techniques provide a significant sacrifice to legibility so they will not be implemented into the main branch (particularly the latter 2 as they save a combined 2 bytes).

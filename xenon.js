@@ -1,6 +1,5 @@
-(_ => {
+(forAll => {
     // Redefinitions to minify every other reference to a single letter
-    let forAll = (element, selector, fn) => element?.querySelectorAll(selector).forEach(fn);
     let htmlDocument = document;
     let getAttribute = "getAttribute";
     let getAttributeNames = "getAttributeNames";
@@ -50,4 +49,4 @@
             templateImport.remove();
         }
     );
-})();
+})((element, selector, fn) => element?.querySelectorAll(selector).forEach(fn));
