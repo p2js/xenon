@@ -2,7 +2,7 @@
 
 Xenon is a small library that implements reusable components into static HTML; No JavaScript interaction, framework or build step.
 
-The entire library uses exactly 558 bytes of JavaScript.
+The entire library uses exactly 544 bytes of JavaScript.
 
 ## Motivation
 
@@ -31,7 +31,7 @@ Alternatively, for faster loading, you can inline Xenon by placing the following
 ```html
 <script>
 // https://github.com/p2js/xenon
-(e=>{let t=(e,t,r)=>e?.querySelectorAll(t).forEach(r),r=e=>t(e,"template[_]",(e=>{t(document,e.getAttribute("_"),(r=>{let o=e.innerHTML;e.getAttributeNames().forEach((t=>"_"!=t&&(o=o.replaceAll("{"+t+"}",r.getAttribute(t)||e.getAttribute(t))))),o=o.replaceAll(/{\$(\S+?)}/g,((e,t)=>r[t].outerHTML||r[t])),r.innerHTML=o,t(r,"if",(e=>e.replaceWith(...e.getAttributeNames().some((e=>r.hasAttribute(e)))?e.childNodes:[]))),r.outerHTML=r.innerHTML})),e.remove()}));r(document),t(document,".template-import",(e=>e.onload=t=>{r(e.contentDocument),e.remove()}))})();
+(_=>{let l=(e,t,r)=>e?.querySelectorAll(t).forEach(r),r=e=>l(e,"template[_]",o=>{l(document,o.getAttribute("_"),r=>{let t=o.innerHTML;o.getAttributeNames().forEach(e=>"_"!=e&&(t=t.replaceAll("{"+e+"}",r.getAttribute(e)||o.getAttribute(e)))),t=t.replaceAll(/{\$(\S+?)}/g,(e,t)=>r[t].outerHTML||r[t]),r.innerHTML=t,l(r,"if",e=>e.replaceWith(...e.getAttributeNames().some(e=>r.hasAttribute(e))?e.childNodes:[])),r.outerHTML=r.innerHTML}),o.remove()});r(document),l(document,".template-import",t=>t.onload=e=>{r(t.contentDocument),t.remove()})})();
 </script>
 ```
 ### Declaring/Using component templates
