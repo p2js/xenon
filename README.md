@@ -2,7 +2,7 @@
 
 Xenon is a small library that implements reusable components into static HTML; No JavaScript interaction, framework or build step.
 
-The entire library uses exactly 544 bytes of JavaScript.
+The entire library uses exactly 563 bytes of JavaScript.
 
 ## Motivation
 
@@ -16,7 +16,7 @@ However, even a small static webpage like this could benefit from having some so
 
 Xenon addresses this issue; an extremely small drop-in library with no dependencies that offers a flexible way to compose easily reusable and maintainable markup.
 
-See [my website's repository](https://github.com/p2js/alfiot.net) to see the library in action, as its projects section was rewritten using Xenon.
+See [my website's repository](https://github.com/p2js/alfiot.net) to see the library in action, as its projects section was rewritten using Xenon components.
 
 ## Usage Documentation
 
@@ -61,7 +61,7 @@ Attribute values can be referenced by inserting their name in curly braces. They
 </template>
 
 <joke noun="<b>shrimp</b>"></joke>
-<!-- Will render as: <p style="color: red">So you're telling me a <b>shrimp</b> fried this rice?</p> -->
+<!-- Renders: <p style="color: red">So you're telling me a <b>shrimp</b> fried this rice?</p> -->
 ```
 
 ### Instance properties
@@ -76,7 +76,7 @@ To access the properties of component instances, such as its inner HTML children
 <double>
     <p>Am I seeing double?</p> 
 </double>
-<!-- Will render as: <p>Am I seeing double?</p> <p>Am I seeing double?</p> -->
+<!-- Renders: <p>Am I seeing double?</p> <p>Am I seeing double?</p> -->
 ```
 If the property refers to an HTML element (such as `{$firstElementChild}` or `{$nextElementSibling}`), it will get correctly stringified using its outer HTML string.
 
@@ -84,24 +84,29 @@ Note that in particular, component children addressed with `{$innerHTML}` can be
 
 ### Conditional rendering
 
-Sometimes, it's useful to want to only display something if an instance includes an attribute, such as a summary component that only shows a thumbnail if the instance provides an image URL.
+Sometimes, it's useful to want to only display something if an instance includes an attribute, such as a summary component that only shows a thumbnail if the instance provides an image URL, or a fallback as a default.
 
-To do this, use an `<if>` element inside your template, passing the attribute that needs to be included as an attribute:
+To do this, use an `<if>` element inside your template, passing the attribute that needs to be included as an attribute, negating it by preceding it with a `!`:
 ```html
 <template _="conditional" name>
     <p>Hi!</p>
+
     <if name>
-        <p>You're here, {name}!</p>
+        <p>Welcome, {name}!</p>
+    </if>
+
+    <if !name>
+        <p>No need to be shy!</p>
     </if>
 </template>
 ```
-These elements will render their inner HTML if one of the provided parameters is present in the element (acting as logical OR), otherwise rendering nothing:
+These elements will render their inner HTML if any of the provided parameters are present/missing in the instance (acting as logical OR), otherwise rendering nothing:
 ```html
 <conditional name="HTML lover"></conditional> 
-<!-- Renders as: <p>Hi!</p> <p>You're here, HTML Lover!</p> -->
+<!-- Renders: <p>Hi!</p> <p>Welcome, HTML Lover!</p> -->
 
 <conditional></conditional>                   
-<!-- Renders as: <p>Hi!</p> -->
+<!-- Renders: <p>Hi!</p> <p>No need to be shy!</p>-->
 ```
 If blocks can be nested to act as logical AND.
 
