@@ -31,7 +31,7 @@ Alternatively, for faster loading, you can inline Xenon by placing the following
 ```html
 <script>
 // https://github.com/p2js/xenon
-(_=>{let l=(e,t,r)=>e?.querySelectorAll(t).forEach(r),r=e=>l(e,"template[_]",o=>{l(document,o.getAttribute("_"),r=>{let t=o.innerHTML;o.getAttributeNames().forEach(e=>"_"!=e&&(t=t.replaceAll("{"+e+"}",r.getAttribute(e)||o.getAttribute(e)))),t=t.replaceAll(/{\$(\S+?)}/g,(e,t)=>r[t].outerHTML||r[t]),r.innerHTML=t,l(r,"if",e=>e.replaceWith(...e.getAttributeNames().some(e=>r.hasAttribute(e))?e.childNodes:[])),r.outerHTML=r.innerHTML}),o.remove()});r(document),l(document,".template-import",t=>t.onload=e=>{r(t.contentDocument),t.remove()})})();
+{let o=(e,t,r)=>e?.querySelectorAll(t).forEach(r),r=e=>o(e,"template[_]",l=>{o(document,l.getAttribute("_"),r=>{let t=l.innerHTML;l.getAttributeNames().forEach(e=>"_"!=e&&(t=t.replaceAll(`{${e}}`,r.getAttribute(e)||l.getAttribute(e)))),t=t.replaceAll(/{\$(\S+?)}/g,(e,t)=>r[t].outerHTML||r[t]),r.innerHTML=t,o(r,"if",e=>e.replaceWith(...e.getAttributeNames().some(e=>"!"==e[0]!=r.hasAttribute(e.replace(/^!/,"")))?e.childNodes:[])),r.outerHTML=r.innerHTML}),l.remove()});r(document),o(document,".template-import",t=>t.onload=e=>{r(t.contentDocument),t.remove()})}
 </script>
 ```
 ### Declaring/Using component templates
@@ -103,7 +103,7 @@ To do this, use an `<if>` element inside your template, passing the attribute th
 These elements will render their inner HTML if any of the provided parameters are present/missing in the instance (acting as logical OR), otherwise rendering nothing:
 ```html
 <conditional name="HTML lover"></conditional> 
-<!-- Renders: <p>Hi!</p> <p>Welcome, HTML Lover!</p> -->
+<!-- Renders: <p>Hi!</p> <p>Welcome, HTML lover!</p> -->
 
 <conditional></conditional>                   
 <!-- Renders: <p>Hi!</p> <p>No need to be shy!</p>-->
